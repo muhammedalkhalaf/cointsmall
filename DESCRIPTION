@@ -18,6 +18,8 @@ Description: Implements cointegration tests with structural breaks designed
     break date detection using ADF or SSR minimization criteria, with 
     small-sample adjusted critical values via response surface methodology.
 License: GPL-3
+URL: https://github.com/muhammedalkhalaf/cointsmall
+BugReports: https://github.com/muhammedalkhalaf/cointsmall/issues
 Encoding: UTF-8
 Depends: R (>= 3.5.0)
 Imports:
