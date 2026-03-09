@@ -51,7 +51,7 @@ correction: Representation, estimation, and testing. Econometrica,
 55(2), 251-276. \doi{10.2307/1913236}
 }
 \author{
-\strong{Maintainer}: Merwan Roudane \email{merwanroudane920@gmail.com}
+\strong{Maintainer}:  
 
 Other contributors:
 \itemize{

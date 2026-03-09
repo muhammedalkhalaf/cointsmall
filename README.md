@@ -16,7 +16,6 @@ The `cointsmall` package implements cointegration tests with structural breaks d
 install.packages("cointsmall")
 
 # Or install the development version from GitHub
-# devtools::install_github("merwanroudane/cointsmall")
 ```
 
 ## Features
@@ -89,8 +88,6 @@ Where D is a dummy variable equal to 1 after the break date.
 
 ## References
 
-- Trinh, H. H. (2022). Testing for cointegration with structural changes in very small sample. THEMA Working Paper n°2022-01, CY Cergy Paris Université. [doi:10.2139/ssrn.4037745](https://doi.org/10.2139/ssrn.4037745)
-
 - Gregory, A. W., & Hansen, B. E. (1996). Residual-based tests for cointegration in models with regime shifts. *Journal of Econometrics*, 70(1), 99-126. [doi:10.1016/0304-4076(69)41685-7](https://doi.org/10.1016/0304-4076(69)41685-7)
 
 - Hatemi-J, A. (2008). Tests for cointegration with two unknown regime shifts with an application to financial market integration. *Empirical Economics*, 35(3), 497-505. [doi:10.1007/s00181-007-0175-9](https://doi.org/10.1007/s00181-007-0175-9)
@@ -98,8 +95,6 @@ Where D is a dummy variable equal to 1 after the break date.
 - Engle, R. F., & Granger, C. W. J. (1987). Co-integration and error correction: Representation, estimation, and testing. *Econometrica*, 55(2), 251-276. [doi:10.2307/1913236](https://doi.org/10.2307/1913236)
 
 ## Author
-
-Dr. Merwan Roudane (merwanroudane920@gmail.com)
 
 ## License
 

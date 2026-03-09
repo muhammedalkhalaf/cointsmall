@@ -7,9 +7,6 @@ Authors@R: c(
            email = "muhammedalkhalaf@gmail.com",
            role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0002-2677-9246")),
-    person("Merwan", "Roudane",
-           role = "ctb",
-           comment = "Original Stata implementation"),
     person("Hoang Huy", "Trinh", role = "ctb"))
 Description: Implements cointegration tests with structural breaks designed 
     for small sample sizes, following the methodology of Trinh (2022) 
