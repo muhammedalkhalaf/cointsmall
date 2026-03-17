@@ -1,0 +1,25 @@
+Package: cointsmall
+Type: Package
+Title: Cointegration Test for Very Small Samples
+Version: 1.0.0
+Authors@R: person("Muhammad", "Alkhalaf", email = "muhammedalkhalaf@gmail.com",
+    role = c("aut", "cre", "cph"),
+    comment = c(ORCID = "0009-0002-2677-9246"))
+Description: Implements the cointegration test with structural breaks
+    for very small samples following Trinh (2022)
+    <https://www.thema.u-cergy.fr/IMG/pdf/2022-01.pdf>. The method
+    applies residual-based ADF-type tests to detect cointegration in
+    time-series data with as few as twelve observations. Supports up to
+    two endogenous structural breaks in the constant (model 'c') or in
+    both constant and slope (model 'cs'). Includes automatic lag selection
+    via BIC, a combined sequential testing procedure, and simulation-based
+    critical values for small samples.
+License: GPL-3
+Encoding: UTF-8
+RoxygenNote: 7.3.2
+Depends: R (>= 3.5.0)
+Imports: stats
+Suggests: testthat (>= 3.0.0)
+Config/testthat/edition: 3
+URL: https://github.com/muhammedalkhalaf/cointsmall
+BugReports: https://github.com/muhammedalkhalaf/cointsmall/issues
