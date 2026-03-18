@@ -69,10 +69,10 @@ cointsmall_combined <- function(y, x, breaks = 1, trim = 0.15,
     stop("Length of 'y' must equal number of rows in 'x'")
   }
   
-  T <- length(y)
+  TT <- length(y)
   m <- ncol(x)
   
-  if (T < 12) {
+  if (TT < 12) {
     stop("Sample size too small. Minimum 12 observations required.")
   }
   
@@ -133,7 +133,7 @@ cointsmall_combined <- function(y, x, breaks = 1, trim = 0.15,
     summary = summary_df,
     selected_model = selected,
     conclusion = conclusion,
-    nobs = T,
+    nobs = TT,
     nvar = m,
     breaks = breaks,
     level = level,

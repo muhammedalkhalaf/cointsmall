@@ -24,7 +24,7 @@
 #'   parameter for break date search. Default is 0.15.
 #' @param maxlags Integer specifying the maximum number of lags for the ADF 
 #'   test. If -1 (default), automatically determined using the rule 
-#'   \code{floor(12*(T/100)^0.25)}.
+#'   \code{floor(12*(TT/100)^0.25)}.
 #' @param level Numeric confidence level for critical values (1, 5, or 10). 
 #'   Default is 5.
 #'
@@ -103,10 +103,10 @@ cointsmall <- function(y, x, breaks = 1, model = NULL, criterion = "adf",
     stop("Length of 'y' must equal number of rows in 'x'")
   }
   
-  T <- length(y)
+  TT <- length(y)
   m <- ncol(x)
   
-  if (T < 12) {
+  if (TT < 12) {
     stop("Sample size too small. Minimum 12 observations required.")
   }
   
@@ -147,9 +147,9 @@ cointsmall <- function(y, x, breaks = 1, model = NULL, criterion = "adf",
   
   # Set maxlags
   if (maxlags == -1) {
-    maxlags <- floor(12 * (T / 100)^0.25)
+    maxlags <- floor(12 * (TT / 100)^0.25)
   }
-  maxlags <- min(maxlags, floor(T / 4))
+  maxlags <- min(maxlags, floor(TT / 4))
   
   # Run appropriate test
   if (breaks == 0) {
@@ -164,7 +164,7 @@ cointsmall <- function(y, x, breaks = 1, model = NULL, criterion = "adf",
   result$breaks <- breaks
   result$model <- model
   result$criterion <- criterion
-  result$nobs <- T
+  result$nobs <- TT
   result$nvar <- m
   result$call <- match.call()
   
@@ -231,7 +231,7 @@ summary.cointsmall <- function(object, ...) {
 
 # Internal function: Test with no breaks (model o)
 .cointsmall_test0 <- function(y, x, maxlags, level) {
-  T <- length(y)
+  TT <- length(y)
   m <- ncol(x)
   
   # Cointegrating regression with constant
@@ -245,7 +245,7 @@ summary.cointsmall <- function(object, ...) {
   adf_result <- .adf_test(resid, maxlags)
   
   # Get critical values
-  cv <- .get_critical_values(T, m, breaks = 0, model = "o")
+  cv <- .get_critical_values(TT, m, breaks = 0, model = "o")
   
   # Compute p-value
   pval <- .interpolate_pvalue(adf_result$stat, cv)
@@ -279,15 +279,15 @@ summary.cointsmall <- function(object, ...) {
 
 # Internal function: Test with one break
 .cointsmall_test1 <- function(y, x, model, criterion, trim, maxlags, level) {
-  T <- length(y)
+  TT <- length(y)
   m <- ncol(x)
   
   # Determine search range
-  t1_min <- ceiling(T * trim)
-  t1_max <- floor(T * (1 - trim))
+  t1_min <- ceiling(TT * trim)
+  t1_max <- floor(TT * (1 - trim))
   
   if (t1_min < 2) t1_min <- 2
-  if (t1_max > T - 1) t1_max <- T - 1
+  if (t1_max > TT - 1) t1_max <- TT - 1
   
   # Initialize search
   best_adf <- Inf
@@ -300,7 +300,7 @@ summary.cointsmall <- function(object, ...) {
   # Search over break dates
   for (t1 in t1_min:t1_max) {
     # Create break dummy
-    D1 <- as.numeric(seq_len(T) >= t1)
+    D1 <- as.numeric(seq_len(TT) >= t1)
     
     # Build design matrix
     if (model == "c") {
@@ -344,7 +344,7 @@ summary.cointsmall <- function(object, ...) {
   }
   
   # Get critical values
-  cv <- .get_critical_values(T, m, breaks = 1, model = model)
+  cv <- .get_critical_values(TT, m, breaks = 1, model = model)
   
   # Compute p-value
   pval <- .interpolate_pvalue(best_adf, cv)
@@ -378,15 +378,15 @@ summary.cointsmall <- function(object, ...) {
 
 # Internal function: Test with two breaks
 .cointsmall_test2 <- function(y, x, model, criterion, trim, maxlags, level) {
-  T <- length(y)
+  TT <- length(y)
   m <- ncol(x)
   
   # Determine search range
-  t_min <- ceiling(T * trim)
-  t_max <- floor(T * (1 - trim))
+  t_min <- ceiling(TT * trim)
+  t_max <- floor(TT * (1 - trim))
   
   if (t_min < 2) t_min <- 2
-  if (t_max > T - 1) t_max <- T - 1
+  if (t_max > TT - 1) t_max <- TT - 1
   
   # Initialize search
   best_adf <- Inf
@@ -401,8 +401,8 @@ summary.cointsmall <- function(object, ...) {
   for (t1 in t_min:(t_max - 1)) {
     for (t2 in (t1 + 1):t_max) {
       # Create break dummies
-      D1 <- as.numeric(seq_len(T) >= t1)
-      D2 <- as.numeric(seq_len(T) >= t2)
+      D1 <- as.numeric(seq_len(TT) >= t1)
+      D2 <- as.numeric(seq_len(TT) >= t2)
       
       # Build design matrix
       if (model == "c") {
@@ -450,7 +450,7 @@ summary.cointsmall <- function(object, ...) {
   }
   
   # Get critical values
-  cv <- .get_critical_values(T, m, breaks = 2, model = model)
+  cv <- .get_critical_values(TT, m, breaks = 2, model = model)
   
   # Compute p-value
   pval <- .interpolate_pvalue(best_adf, cv)

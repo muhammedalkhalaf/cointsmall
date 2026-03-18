@@ -4,7 +4,7 @@
 #' Computes critical values for the small-sample cointegration test using
 #' response surface methodology following Trinh (2022).
 #'
-#' @param T Sample size.
+#' @param TT Sample size.
 #' @param m Number of independent variables in the cointegrating regression.
 #' @param breaks Number of structural breaks (0, 1, or 2).
 #' @param model Model specification ("o", "c", or "cs").
@@ -17,14 +17,14 @@
 #' Critical values are computed using response surface equations that account
 #' for:
 #' \itemize{
-#'   \item Small sample sizes (T)
+#'   \item Small sample sizes (TT)
 #'   \item Number of regressors (m)
 #'   \item Number of structural breaks
 #'   \item Model specification (level shift vs. regime shift)
 #' }
 #'
 #' The response surface follows the general form:
-#' \deqn{cv = c_\infty + c_1/T + c_2/T^2}
+#' \deqn{cv = c_\infty + c_1/TT + c_2/TT^2}
 #' where the coefficients depend on m, breaks, and model.
 #'
 #' For model "o" (no breaks), critical values are based on Engle-Granger (1987)
@@ -44,15 +44,15 @@
 #' \doi{10.22004/ag.econ.279422}
 #'
 #' @examples
-#' # Critical values for m=1 regressor, T=30, no breaks
-#' cointsmall_cv(T = 30, m = 1, breaks = 0, model = "o")
+#' # Critical values for m=1 regressor, TT=30, no breaks
+#' cointsmall_cv(TT = 30, m = 1, breaks = 0, model = "o")
 #' 
 #' # Critical values with one break (model cs)
-#' cointsmall_cv(T = 50, m = 2, breaks = 1, model = "cs")
+#' cointsmall_cv(TT = 50, m = 2, breaks = 1, model = "cs")
 #'
 #' @export
-cointsmall_cv <- function(T, m, breaks = 0, model = "o", level = NULL) {
-  cv <- .get_critical_values(T, m, breaks, model)
+cointsmall_cv <- function(TT, m, breaks = 0, model = "o", level = NULL) {
+  cv <- .get_critical_values(TT, m, breaks, model)
   
   if (is.null(level)) {
     return(cv)
@@ -65,10 +65,10 @@ cointsmall_cv <- function(T, m, breaks = 0, model = "o", level = NULL) {
 #'
 #' @keywords internal
 #' @noRd
-.get_critical_values <- function(T, m, breaks, model) {
+.get_critical_values <- function(TT, m, breaks, model) {
   # Response surface coefficients
   # Format: list(c_inf, c1, c2) for each (m, model, significance level)
-  # cv = c_inf + c1/T + c2/T^2
+  # cv = c_inf + c1/TT + c2/TT^2
   
   # Model o: No structural break (Engle-Granger / MacKinnon style)
   # Based on MacKinnon (2010) response surface coefficients
@@ -271,9 +271,9 @@ cointsmall_cv <- function(T, m, breaks = 0, model = "o", level = NULL) {
   }
   
   # Compute critical values using response surface
-  cv01 <- coef$cv01[1] + coef$cv01[2] / T + coef$cv01[3] / T^2
-  cv05 <- coef$cv05[1] + coef$cv05[2] / T + coef$cv05[3] / T^2
-  cv10 <- coef$cv10[1] + coef$cv10[2] / T + coef$cv10[3] / T^2
+  cv01 <- coef$cv01[1] + coef$cv01[2] / TT + coef$cv01[3] / TT^2
+  cv05 <- coef$cv05[1] + coef$cv05[2] / TT + coef$cv05[3] / TT^2
+  cv10 <- coef$cv10[1] + coef$cv10[2] / TT + coef$cv10[3] / TT^2
   
   list(cv01 = cv01, cv05 = cv05, cv10 = cv10)
 }

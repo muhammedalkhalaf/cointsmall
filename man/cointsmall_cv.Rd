@@ -4,10 +4,10 @@
 \alias{cointsmall_cv}
 \title{Critical Values for Cointegration Tests with Structural Breaks}
 \usage{
-cointsmall_cv(T, m, breaks = 0, model = "o", level = NULL)
+cointsmall_cv(TT, m, breaks = 0, model = "o", level = NULL)
 }
 \arguments{
-\item{T}{Sample size.}
+\item{TT}{Sample size.}
 
 \item{m}{Number of independent variables in the cointegrating regression.}
 
@@ -29,14 +29,14 @@ response surface methodology following Trinh (2022).
 Critical values are computed using response surface equations that account
 for:
 \itemize{
-  \item Small sample sizes (T)
+  \item Small sample sizes (TT)
   \item Number of regressors (m)
   \item Number of structural breaks
   \item Model specification (level shift vs. regime shift)
 }
 
 The response surface follows the general form:
-\deqn{cv = c_\infty + c_1/T + c_2/T^2}
+\deqn{cv = c_\infty + c_1/TT + c_2/TT^2}
 where the coefficients depend on m, breaks, and model.
 
 For model "o" (no breaks), critical values are based on Engle-Granger (1987)
@@ -47,11 +47,11 @@ Gregory-Hansen (1996), Hatemi-J (2008), and small-sample corrections
 from Trinh (2022).
 }
 \examples{
-# Critical values for m=1 regressor, T=30, no breaks
-cointsmall_cv(T = 30, m = 1, breaks = 0, model = "o")
+# Critical values for m=1 regressor, TT=30, no breaks
+cointsmall_cv(TT = 30, m = 1, breaks = 0, model = "o")
 
 # Critical values with one break (model cs)
-cointsmall_cv(T = 50, m = 2, breaks = 1, model = "cs")
+cointsmall_cv(TT = 50, m = 2, breaks = 1, model = "cs")
 
 }
 \references{

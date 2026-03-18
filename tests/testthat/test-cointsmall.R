@@ -73,14 +73,14 @@ test_that("cointsmall_combined works", {
 test_that("critical values are correct", {
   # Test that critical values become less negative with sample size
   # (small samples need more stringent critical values)
-  cv_small <- cointsmall_cv(T = 20, m = 1, breaks = 0, model = "o")
-  cv_large <- cointsmall_cv(T = 100, m = 1, breaks = 0, model = "o")
+  cv_small <- cointsmall_cv(TT = 20, m = 1, breaks = 0, model = "o")
+  cv_large <- cointsmall_cv(TT = 100, m = 1, breaks = 0, model = "o")
   
   # Small sample critical values should be more negative (more stringent)
   expect_true(cv_small$cv05 < cv_large$cv05)
   
   # Test ordering: cv01 < cv05 < cv10
-  cv <- cointsmall_cv(T = 50, m = 1, breaks = 0, model = "o")
+  cv <- cointsmall_cv(TT = 50, m = 1, breaks = 0, model = "o")
   expect_true(cv$cv01 < cv$cv05)
   expect_true(cv$cv05 < cv$cv10)
 })

@@ -1,7 +1,7 @@
 Package: cointsmall
 Type: Package
 Title: Cointegration Tests with Structural Breaks in Small Samples
-Version: 1.0.0
+Version: 1.0.2
 Authors@R: c(
     person("Muhammad", "Alkhalaf", 
            email = "muhammedalkhalaf@gmail.com",

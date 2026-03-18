@@ -45,7 +45,7 @@ parameter for break date search. Default is 0.15.}
 
 \item{maxlags}{Integer specifying the maximum number of lags for the ADF 
 test. If -1 (default), automatically determined using the rule 
-\code{floor(12*(T/100)^0.25)}.}
+\code{floor(12*(TT/100)^0.25)}.}
 
 \item{level}{Numeric confidence level for critical values (1, 5, or 10). 
 Default is 5.}
