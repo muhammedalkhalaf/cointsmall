@@ -1,4 +1,4 @@
-﻿citHeader("To cite cointsmall in publications use:")
+citHeader("To cite cointsmall in publications use:")
 
 bibentry(
   bibtype  = "Manual",
