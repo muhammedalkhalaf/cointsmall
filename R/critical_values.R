@@ -41,7 +41,7 @@
 #'
 #' MacKinnon, J. G. (2010). Critical values for cointegration tests. 
 #' Queen's Economics Department Working Paper No. 1227.
-#' \doi{10.22004/ag.econ.279422}
+#'
 #'
 #' @examples
 #' # Critical values for m=1 regressor, TT=30, no breaks

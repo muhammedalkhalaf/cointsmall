@@ -61,5 +61,4 @@ very small sample. THEMA Working Paper n°2022-01, CY Cergy Paris Université.
 
 MacKinnon, J. G. (2010). Critical values for cointegration tests. 
 Queen's Economics Department Working Paper No. 1227.
-\doi{10.22004/ag.econ.279422}
 }
