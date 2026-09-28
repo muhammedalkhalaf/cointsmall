@@ -79,10 +79,16 @@ test_that("critical values are correct", {
   # Small sample critical values should be more negative (more stringent)
   expect_true(cv_small$cv05 < cv_large$cv05)
   
-  # Test ordering: cv01 < cv05 < cv10
+  # Values of Table 1 in Trinh (2022), to two decimals
+  expect_equal(round(cointsmall_cv(50, 1, 1, "cs", level = 5), 1), -5.4)
+  expect_equal(round(cointsmall_cv(15, 2, 0, "o", level = 5), 1), -4.5)
+  expect_equal(round(cointsmall_cv(30, 3, 2, "cs", level = 5), 2), -9.36)
+
+  # Only the 5% quantile is published
   cv <- cointsmall_cv(TT = 50, m = 1, breaks = 0, model = "o")
-  expect_true(cv$cv01 < cv$cv05)
-  expect_true(cv$cv05 < cv$cv10)
+  expect_true(is.na(cv$cv01) && is.na(cv$cv10))
+  expect_error(cointsmall_cv(50, 1, 0, "o", level = 1), "5% critical values only")
+  expect_error(cointsmall_cv(50, 4, 0, "o"), "at most 3 regressors")
 })
 
 test_that("input validation works", {

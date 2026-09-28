@@ -29,7 +29,7 @@
 #' }
 #'
 #' @references
-#' Trinh, H. H. (2022). Testing for cointegration with structural changes in 
+#' Trinh, J. (2022). Testing for cointegration with structural changes in 
 #' very small sample. THEMA Working Paper n°2022-01, CY Cergy Paris Université.
 #' \\url{https://ideas.repec.org/p/ema/worpap/2022-01.html}
 #'

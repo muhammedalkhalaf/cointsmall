@@ -9,56 +9,47 @@ cointsmall_cv(TT, m, breaks = 0, model = "o", level = NULL)
 \arguments{
 \item{TT}{Sample size.}
 
-\item{m}{Number of independent variables in the cointegrating regression.}
+\item{m}{Number of independent variables in the cointegrating regression
+(1, 2 or 3).}
 
 \item{breaks}{Number of structural breaks (0, 1, or 2).}
 
 \item{model}{Model specification ("o", "c", or "cs").}
 
-\item{level}{Significance level (1, 5, or 10). If NULL, returns all levels.}
+\item{level}{Significance level. Only 5 is available, because Trinh (2022)
+reports the response surfaces for the 5\% quantile only. If NULL, the
+list of all levels is returned, with \code{NA} at 1\% and 10\%.}
 }
 \value{
 If level is specified, returns the critical value. If NULL, returns
-a named list with cv01, cv05, and cv10.
+a named list with cv01, cv05, and cv10 (cv01 and cv10 are \code{NA}).
 }
 \description{
-Computes critical values for the small-sample cointegration test using
-response surface methodology following Trinh (2022).
+Computes the size-corrected 5\% critical values of the ADF* test of no
+cointegration from the response surfaces estimated by Trinh (2022).
 }
 \details{
-Critical values are computed using response surface equations that account
-for:
-\itemize{
-  \item Small sample sizes (TT)
-  \item Number of regressors (m)
-  \item Number of structural breaks
-  \item Model specification (level shift vs. regime shift)
-}
-
-The response surface follows the general form:
-\deqn{cv = c_\infty + c_1/TT + c_2/TT^2}
-where the coefficients depend on m, breaks, and model.
-
-For model "o" (no breaks), critical values are based on Engle-Granger (1987)
-and MacKinnon (1991, 2010) response surfaces.
-
-For models with breaks, critical values incorporate adjustments from
-Gregory-Hansen (1996), Hatemi-J (2008), and small-sample corrections
-from Trinh (2022).
+The critical value is
+\deqn{cv(T) = \psi_\infty + \sum_{k=1}^{K} \psi_k T^{-k},}
+with the coefficients of Table 13 of Trinh (2022), estimated from 10,000
+replications for T = 12 to 1,000 with the polynomial order K chosen by
+AIC (K at most 6). They cover m = 1, 2, 3 regressors, zero breaks
+(model "o"), and one or two breaks in the constant (model "c") or in the
+constant and the slopes (model "cs"). The resulting values reproduce
+Table 1 of the paper (for example -5.40 for m = 1, one break, model "cs"
+and T = 50).
 }
 \examples{
-# Critical values for m=1 regressor, TT=30, no breaks
-cointsmall_cv(TT = 30, m = 1, breaks = 0, model = "o")
+# 5\% critical value for m = 1 regressor, T = 30, no breaks
+cointsmall_cv(TT = 30, m = 1, breaks = 0, model = "o", level = 5)
 
-# Critical values with one break (model cs)
+# One break in constant and slope, m = 2, T = 50
 cointsmall_cv(TT = 50, m = 2, breaks = 1, model = "cs")
 
 }
 \references{
-Trinh, H. H. (2022). Testing for cointegration with structural changes in 
-very small sample. THEMA Working Paper n°2022-01, CY Cergy Paris Université.
+Trinh, J. (2022). Testing for cointegration with structural changes in
+very small sample. THEMA Working Paper 2022-01, CY Cergy Paris
+Universite.
 \url{https://ideas.repec.org/p/ema/worpap/2022-01.html}
-
-MacKinnon, J. G. (2010). Critical values for cointegration tests. 
-Queen's Economics Department Working Paper No. 1227.
 }

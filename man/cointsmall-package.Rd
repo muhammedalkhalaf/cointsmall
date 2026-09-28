@@ -34,7 +34,7 @@ Three model specifications are supported:
 }
 
 \references{
-Trinh, H. H. (2022). Testing for cointegration with structural changes in 
+Trinh, J. (2022). Testing for cointegration with structural changes in 
 very small sample. THEMA Working Paper n°2022-01, CY Cergy Paris Université.
 \url{https://ideas.repec.org/p/ema/worpap/2022-01.html}
 
@@ -53,9 +53,5 @@ correction: Representation, estimation, and testing. Econometrica,
 \author{
 \strong{Maintainer}:  
 
-Other contributors:
-\itemize{
-  \item Hoang Huy Trinh (Author of the underlying methodology) [contributor]
-}
 }
 \keyword{internal}

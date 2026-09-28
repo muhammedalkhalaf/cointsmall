@@ -47,8 +47,8 @@ parameter for break date search. Default is 0.15.}
 test. If -1 (default), automatically determined using the rule 
 \code{floor(12*(TT/100)^0.25)}.}
 
-\item{level}{Numeric confidence level for critical values (1, 5, or 10). 
-Default is 5.}
+\item{level}{Significance level in percent. Only 5 is available,
+because Trinh (2022) reports 5\% critical values only.}
 
 \item{...}{Additional arguments (currently unused).}
 
@@ -58,10 +58,11 @@ Default is 5.}
 An object of class \code{"cointsmall"} containing:
 \item{statistic}{The ADF* test statistic}
 \item{cv}{Critical value at the specified level}
-\item{cv01}{Critical value at 1\% level}
+\item{cv01}{\code{NA}; Trinh (2022) tabulates the 5\% quantile only}
 \item{cv05}{Critical value at 5\% level}
-\item{cv10}{Critical value at 10\% level}
-\item{pvalue}{Approximate p-value}
+\item{cv10}{\code{NA}; see \code{cv01}}
+\item{pvalue}{\code{NA}; p-values are not available from the
+  published response surfaces}
 \item{decision}{Character string with test decision}
 \item{reject}{Logical indicating whether to reject null hypothesis}
 \item{breaks}{Number of breaks tested}
@@ -120,7 +121,7 @@ print(result_break)
 
 }
 \references{
-Trinh, H. H. (2022). Testing for cointegration with structural changes in 
+Trinh, J. (2022). Testing for cointegration with structural changes in 
 very small sample. THEMA Working Paper n°2022-01, CY Cergy Paris Université.
 \url{https://ideas.repec.org/p/ema/worpap/2022-01.html}
 }

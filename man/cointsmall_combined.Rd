@@ -26,8 +26,8 @@ parameter for break date search. Default is 0.15.}
 \item{maxlags}{Integer specifying the maximum number of lags for the ADF 
 test. If -1 (default), automatically determined.}
 
-\item{level}{Numeric confidence level for critical values (1, 5, or 10). 
-Default is 5.}
+\item{level}{Significance level in percent. Only 5 is available,
+because Trinh (2022) reports 5\% critical values only.}
 
 \item{...}{Additional arguments (currently unused).}
 
@@ -77,7 +77,7 @@ print(result)
 
 }
 \references{
-Trinh, H. H. (2022). Testing for cointegration with structural changes in 
+Trinh, J. (2022). Testing for cointegration with structural changes in 
 very small sample. THEMA Working Paper n°2022-01, CY Cergy Paris Université.
 \url{https://ideas.repec.org/p/ema/worpap/2022-01.html}
 }

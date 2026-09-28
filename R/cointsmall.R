@@ -25,16 +25,16 @@
 #' @param maxlags Integer specifying the maximum number of lags for the ADF 
 #'   test. If -1 (default), automatically determined using the rule 
 #'   \code{floor(12*(TT/100)^0.25)}.
-#' @param level Numeric confidence level for critical values (1, 5, or 10). 
-#'   Default is 5.
-#'
+#' @param level Significance level in percent. Only 5 is available,
+#'   because Trinh (2022) reports 5\% critical values only.
 #' @return An object of class \code{"cointsmall"} containing:
 #'   \item{statistic}{The ADF* test statistic}
 #'   \item{cv}{Critical value at the specified level}
-#'   \item{cv01}{Critical value at 1\% level}
+#'   \item{cv01}{\code{NA}; Trinh (2022) tabulates the 5\% quantile only}
 #'   \item{cv05}{Critical value at 5\% level}
-#'   \item{cv10}{Critical value at 10\% level}
-#'   \item{pvalue}{Approximate p-value}
+#'   \item{cv10}{\code{NA}; see \code{cv01}}
+#'   \item{pvalue}{\code{NA}; p-values are not available from the
+#'     published response surfaces}
 #'   \item{decision}{Character string with test decision}
 #'   \item{reject}{Logical indicating whether to reject null hypothesis}
 #'   \item{breaks}{Number of breaks tested}
@@ -66,7 +66,7 @@
 #' following Trinh (2022), which accounts for the small sample bias.
 #'
 #' @references
-#' Trinh, H. H. (2022). Testing for cointegration with structural changes in 
+#' Trinh, J. (2022). Testing for cointegration with structural changes in 
 #' very small sample. THEMA Working Paper n°2022-01, CY Cergy Paris Université.
 #' \\url{https://ideas.repec.org/p/ema/worpap/2022-01.html}
 #'
@@ -141,8 +141,8 @@ cointsmall <- function(y, x, breaks = 1, model = NULL, criterion = "adf",
   }
   
   # Validate level
-  if (!level %in% c(1, 5, 10)) {
-    stop("'level' must be 1, 5, or 10")
+  if (!identical(as.numeric(level), 5)) {
+    stop("'level' must be 5: Trinh (2022) reports 5% critical values only")
   }
   
   # Set maxlags
@@ -195,11 +195,7 @@ print.cointsmall <- function(x, ...) {
   cat(strrep("-", 70), "\n")
   cat(sprintf("ADF* statistic: %9.4f\n", x$statistic))
   cat(sprintf("Lags selected:  %9d\n", x$lags))
-  cat(sprintf("Critical value (%d%%): %9.4f\n", 
-              switch(as.character(which(c(1, 5, 10) == 5)), 
-                     "1" = 1, "2" = 5, "3" = 10), 
-              x$cv05))
-  cat(sprintf("P-value:        %9.4f\n", x$pvalue))
+  cat(sprintf("Critical value (5%%): %9.4f\n", x$cv05))
   cat(strrep("-", 70), "\n")
   
   cat("Decision:", x$decision, "\n")
@@ -221,10 +217,7 @@ summary.cointsmall <- function(object, ...) {
         paste(round(object$break_dates / object$nobs, 3), collapse = ", "), "\n")
   }
   
-  cat("\nCritical Values:\n")
-  cat(sprintf("  1%%:  %9.4f\n", object$cv01))
-  cat(sprintf("  5%%:  %9.4f\n", object$cv05))
-  cat(sprintf("  10%%: %9.4f\n", object$cv10))
+  cat("\nCritical value (5%, Trinh 2022, Table 13):", sprintf("%.4f", object$cv05), "\n")
   
   invisible(object)
 }
@@ -248,7 +241,7 @@ summary.cointsmall <- function(object, ...) {
   cv <- .get_critical_values(TT, m, breaks = 0, model = "o")
   
   # Compute p-value
-  pval <- .interpolate_pvalue(adf_result$stat, cv)
+  pval <- NA_real_  # no p-values: only the 5% quantile is tabulated
   
   # Determine rejection
   cv_level <- cv[[paste0("cv", sprintf("%02d", level))]]
@@ -347,7 +340,7 @@ summary.cointsmall <- function(object, ...) {
   cv <- .get_critical_values(TT, m, breaks = 1, model = model)
   
   # Compute p-value
-  pval <- .interpolate_pvalue(best_adf, cv)
+  pval <- NA_real_  # no p-values: only the 5% quantile is tabulated
   
   # Determine rejection
   cv_level <- cv[[paste0("cv", sprintf("%02d", level))]]
@@ -453,7 +446,7 @@ summary.cointsmall <- function(object, ...) {
   cv <- .get_critical_values(TT, m, breaks = 2, model = model)
   
   # Compute p-value
-  pval <- .interpolate_pvalue(best_adf, cv)
+  pval <- NA_real_  # no p-values: only the 5% quantile is tabulated
   
   # Determine rejection
   cv_level <- cv[[paste0("cv", sprintf("%02d", level))]]

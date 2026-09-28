@@ -1,19 +1,19 @@
 Package: cointsmall
 Type: Package
 Title: Cointegration Tests with Structural Breaks in Small Samples
-Version: 1.0.3
+Version: 1.0.4
 Authors@R: c(
     person("Muhammad", "Alkhalaf", 
            email = "muhammedalkhalaf@gmail.com",
            role = c("aut", "cre", "cph"),
-           comment = c(ORCID = "0009-0002-2677-9246")),
-    person("Hoang Huy", "Trinh", role = "ctb"))
+           comment = c(ORCID = "0009-0002-2677-9246")))
 Description: Implements cointegration tests with structural breaks designed 
     for small sample sizes, following the methodology of Trinh (2022) 
     <https://ideas.repec.org/p/ema/worpap/2022-01.html>. Supports models with no breaks, breaks in 
     constant only, and breaks in both constant and slope. Provides endogenous 
     break date detection using ADF or SSR minimization criteria, with 
-    small-sample adjusted critical values via response surface methodology.
+    the size-corrected 5% critical values of the response surfaces in
+    Trinh (2022), for up to three regressors.
 License: GPL-3
 URL: https://github.com/muhammedalkhalaf/cointsmall
 BugReports: https://github.com/muhammedalkhalaf/cointsmall/issues
@@ -23,5 +23,5 @@ Imports:
     stats
 Suggests:
     testthat (>= 3.0.0)
-RoxygenNote: 7.3.1
 Config/testthat/edition: 3
+Config/roxygen2/version: 8.1.0
