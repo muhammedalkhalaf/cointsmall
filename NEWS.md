@@ -1,3 +1,7 @@
+# cointsmall 1.0.3
+
+* Removed a DOI wrongly attached to the MacKinnon (2010) working paper; the citation text is unchanged. No changes to code.
+
 # cointsmall 1.0.0
 
 * Initial CRAN release.
